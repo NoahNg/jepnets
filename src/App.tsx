@@ -2,88 +2,119 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Card, Col, Container, Modal, Navbar, Row } from 'react-bootstrap';
+import { netDataType, netsData } from './data';
+import styled from 'styled-components';
+
+const NavbarStyled = styled(Navbar)`
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.02);
+`;
+
+const NavbarName = styled(Navbar.Brand)`
+  font-weight: bold;
+  color: #16425b;
+  font-size: 2rem;
+`;
+
+const NetsContainer = styled(Row)`
+  border-radius: 10px;
+  background-color: #16425b;
+`;
+
+const Net = styled(Card)`
+  border-radius: 10px;
+  border: none;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+`;
+
+const ModalPhoto = styled.img`
+  width: 100%;
+  max-width: 25rem;
+  height: auto;
+`;
 
 function App() {
   const [modalShow, setModalShow] = useState(false);
+  const [selectedNet, setSelectedNet] = useState<netDataType | null>(null);
+
+  const handleCardClick = (net: netDataType) => {
+    setSelectedNet(net); // Set the selected net's data to the state
+    setModalShow(true); // Show the modal
+  };
+
   return (
     <>
-      <Navbar
-        sticky='top'
-        bg='white'
-        style={{ boxShadow: '0px 5px rgba(0, 0, 0, 0.02)' }}
-      >
-        <Container className='justify-content-between'>
-          <Navbar.Brand
-            style={{
-              fontWeight: 'bold',
-              color: '#16425B',
-              fontSize: '2rem',
-            }}
-            href='#home'
-          >
-            Jepnets
-          </Navbar.Brand>
-          <Col xs='auto'>
-            <Row style={{ fontWeight: 'bold' }}>Phone number:</Row>
-            <Row style={{ fontWeight: 'bold' }}>Email:</Row>
-          </Col>
+      <NavbarStyled sticky='top' bg='white'>
+        <Container>
+          <NavbarName>Jepnets</NavbarName>
         </Container>
-      </Navbar>
+      </NavbarStyled>
 
-      <div className='pb-4 my-4'>
+      <div className='my-4 mx-4'>
         {' '}
-        <h2>
-          <b>Scientific Fishing Nets</b>
+        <img alt='' src='src/assets/logo.png' className='mt-4' />{' '}
+        <h2 className='my-5'>
+          <b>Research Nets Made for You</b>
         </h2>
         <p>
-          <i>Short blurb</i>
+          <i>We make a variety of research nets to suit your requirements.</i>
+        </p>
+        <p className='pb-4 mb-0'>
+          <i>
+            Get in touch and we will see how we can help you out:
+            <a href='mailto:jepnets@gmail.com'> jepnets@gmail.com</a>
+          </i>
         </p>
       </div>
-      {/* <h2 className='py-4'>Scientific Fishing Nets</h2> */}
-      <Container
-        className=''
-        // style={{
-        //   borderRadius: '10px',
-        //   backgroundColor: '#16425B',
-        // }}
-      >
-        <Row
-          xs={1}
-          md={2}
-          lg={3}
-          className='g-5 pb-5 px-4 mx-2'
-          style={{
-            borderRadius: '10px',
-            backgroundColor: '#16425B',
-          }}
-        >
-          {Array.from({ length: 6 }).map((_, idx) => (
-            <Col md={6} key={idx}>
-              <Card
-                onClick={() => setModalShow(true)}
-                style={{
-                  borderRadius: '10px',
-                  border: 'none',
-                  boxShadow: '5px 5px rgba(0, 0, 0, 0.5)',
-                }}
-              >
+
+      <Container>
+        <NetsContainer xs={1} md={2} lg={3} className='g-5 pb-5 px-4 mx-2 my-0'>
+          {netsData.map((net, index) => (
+            <Col md={6} key={index}>
+              <Net onClick={() => handleCardClick(net)}>
                 <Card.Img
                   className='p-2 m-auto'
                   variant='top'
-                  src='src/assets/fishnet-dummy.jpg'
-                  style={{ maxWidth: '12rem' }}
+                  src={net.photoURL}
                 />
                 <Card.Body>
                   <Card.Title>
-                    <b>Name</b>
+                    <b>{net.name}</b>
                   </Card.Title>
-                  <Card.Text>Short description</Card.Text>
+                  <Card.Text>{net.specs}</Card.Text>
                 </Card.Body>
-              </Card>
+              </Net>
             </Col>
           ))}
-        </Row>
+        </NetsContainer>
       </Container>
+
+      <footer className='mt-5'>
+        {' '}
+        <hr className='mx-5' />
+        <Row xs={1} md={3} className='mx-5'>
+          <Col className='my-auto pb-3'>
+            <b>Based in Hamilton, Waikato, NZ</b>
+          </Col>
+          <Col className='pb-3'>
+            <Col>
+              <b>Phone number</b>
+            </Col>
+            <Col>
+              {' '}
+              <a href='tel:+6421368967'>021368967</a>
+            </Col>
+          </Col>
+          <Col className='pb-3'>
+            <Col>
+              <b>Email</b>
+            </Col>
+            <Col>
+              <a href='mailto:jepnets@gmail.com'>jepnets@gmail.com</a>
+            </Col>
+          </Col>
+        </Row>
+      </footer>
+
       <Modal
         show={modalShow}
         onHide={() => setModalShow(false)}
@@ -91,19 +122,17 @@ function App() {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-vcenter'>Name</Modal.Title>
+          <Modal.Title id='contained-modal-title-vcenter'>
+            {selectedNet?.name}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
             <Col>
-              <img
-                src='src/assets/fishnet-dummy.jpg'
-                style={{ maxWidth: '12rem' }}
-              />
+              <ModalPhoto src={selectedNet?.photoURL} />
             </Col>
             <Col>
-              <p>Specs:</p>
-              <p>Price:</p>
+              <p>Specs: {selectedNet?.specs}</p>
             </Col>
           </Row>
         </Modal.Body>
