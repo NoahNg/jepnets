@@ -51,7 +51,7 @@ function App() {
 
       <div className='my-4 mx-4'>
         {' '}
-        <img alt='' src='/assets/logo.png' className='mt-4' />{' '}
+        <img alt='' src='./assets/logo.png' className='mt-4' />{' '}
         <h2 className='my-5'>
           <b>Research Nets Made for You</b>
         </h2>
