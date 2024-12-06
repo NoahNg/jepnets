@@ -1,19 +1,19 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
-import { Card, Col, Container, Modal, Navbar, Row } from 'react-bootstrap';
+import { Card, Col, Container, Modal, Row } from 'react-bootstrap';
 import { netDataType, netsData } from './data';
 import styled from 'styled-components';
 
-const NavbarStyled = styled(Navbar)`
-  box-shadow: 0px 5px rgba(0, 0, 0, 0.02);
-`;
+// const NavbarStyled = styled(Navbar)`
+//   box-shadow: 0px 5px rgba(0, 0, 0, 0.02);
+// `;
 
-const NavbarName = styled(Navbar.Brand)`
-  font-weight: bold;
-  color: #16425b;
-  font-size: 2rem;
-`;
+// const NavbarName = styled(Navbar.Brand)`
+//   font-weight: bold;
+//   color: #16425b;
+//   font-size: 2rem;
+// `;
 
 const NetsContainer = styled(Row)`
   border-radius: 10px;
@@ -42,12 +42,12 @@ function App() {
   };
 
   return (
-    <>
-      <NavbarStyled sticky='top' bg='white'>
+    <Container>
+      {/* <NavbarStyled sticky='top' bg='white'>
         <Container>
           <NavbarName>Jepnets</NavbarName>
         </Container>
-      </NavbarStyled>
+      </NavbarStyled> */}
 
       <div className='my-4 mx-4'>
         {' '}
@@ -58,11 +58,14 @@ function App() {
         <p>
           <i>We make a variety of research nets to suit your requirements.</i>
         </p>
-        <p className='pb-4 mb-0'>
+        <p>
           <i>
             Get in touch and we will see how we can help you out:
             <a href='mailto:jepnets@gmail.com'> jepnets@gmail.com</a>
           </i>
+        </p>
+        <p className='pb-4 mb-0'>
+          <i>Click on images to get details.</i>
         </p>
       </div>
 
@@ -80,7 +83,6 @@ function App() {
                   <Card.Title>
                     <b>{net.name}</b>
                   </Card.Title>
-                  <Card.Text>{net.specs}</Card.Text>
                 </Card.Body>
               </Net>
             </Col>
@@ -120,6 +122,7 @@ function App() {
         onHide={() => setModalShow(false)}
         aria-labelledby='contained-modal-title-vcenter'
         centered
+        size='lg'
       >
         <Modal.Header closeButton>
           <Modal.Title id='contained-modal-title-vcenter'>
@@ -132,12 +135,17 @@ function App() {
               <ModalPhoto src={selectedNet?.photoURL} />
             </Col>
             <Col>
-              <p>Specs: {selectedNet?.specs}</p>
+              <b>Standard specifications:</b>
+              <ul>
+                {selectedNet?.specs.map((spec, index) => (
+                  <li key={index}>{spec}</li>
+                ))}
+              </ul>
             </Col>
           </Row>
         </Modal.Body>
       </Modal>
-    </>
+    </Container>
   );
 }
 
