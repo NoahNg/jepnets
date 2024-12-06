@@ -1,4 +1,4 @@
-@charset "UTF-8";#root{width:100vw;height:100%;margin:0 auto;text-align:center}body{min-width:100vw;height:100vh}a{color:#16425b!important;text-decoration:underline!important}/*!
+@charset "UTF-8";#root{width:100vw;margin:0 auto;text-align:center}body{min-width:100vw;min-height:min-content}a{color:#16425b!important;text-decoration:underline!important}/*!
  * Bootstrap  v5.3.3 (https://getbootstrap.com/)
  * Copyright 2011-2024 The Bootstrap Authors
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
