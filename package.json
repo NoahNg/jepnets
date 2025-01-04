@@ -2,7 +2,7 @@
   "name": "jepnets",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://noahng.github.io/jepnets/",
+  "homepage": "https://jepnets.co.nz/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
