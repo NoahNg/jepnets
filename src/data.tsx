@@ -54,7 +54,7 @@ export const netsData: netDataType[] = [
   {
     id: '5',
     name: 'Measuring Board',
-    specs: ['Length: 1.0m or 600mm'],
+    specs: ['Length: 1.0m, 0.6m or 0.3m'],
     photoURL: './assets/Measuring Board.png',
   },
 ];
