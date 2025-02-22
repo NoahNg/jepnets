@@ -12,7 +12,7 @@ export const netsData: netDataType[] = [
     specs: [
       'Width: 1.3m',
       'Height: 1.1m',
-      'Mesh size: 4mm',
+      'Mesh size: 6mm',
       '1.6m fibreglass poles, weighted bottom line',
       'Other specs built to order.',
     ],
