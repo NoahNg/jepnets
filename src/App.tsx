@@ -5,31 +5,36 @@ import { Card, Col, Container, Modal, Row } from 'react-bootstrap';
 import { netDataType, netsData } from './data';
 import styled from 'styled-components';
 
-// const NavbarStyled = styled(Navbar)`
-//   box-shadow: 0px 5px rgba(0, 0, 0, 0.02);
-// `;
-
-// const NavbarName = styled(Navbar.Brand)`
-//   font-weight: bold;
-//   color: #16425b;
-//   font-size: 2rem;
-// `;
-
 const NetsContainer = styled(Row)`
   border-radius: 10px;
-  background-color: #16425b;
+  background-color: rgb(48, 74, 88);
 `;
 
 const Net = styled(Card)`
   border-radius: 10px;
   border: none;
   box-shadow: 5px 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+  }
 `;
 
 const ModalPhoto = styled.img`
   width: 100%;
   max-width: 25rem;
   height: auto;
+`;
+
+const Banner = styled.div`
+  background-color: #ffcccb;
+  color: #000;
+  text-align: center;
+  padding: 10px 0;
+  font-weight: bold;
+  font-size: 1.2rem;
 `;
 
 function App() {
@@ -42,13 +47,8 @@ function App() {
   };
 
   return (
-    <Container>
-      {/* <NavbarStyled sticky='top' bg='white'>
-        <Container>
-          <NavbarName>Jepnets</NavbarName>
-        </Container>
-      </NavbarStyled> */}
-
+    <Container fluid>
+      <Banner>We are closed until 2027</Banner>
       <div className='my-4 mx-4'>
         {' '}
         <img alt='' src='./assets/logo.png' className='mt-4' />{' '}
@@ -69,7 +69,7 @@ function App() {
         </p>
       </div>
 
-      <Container>
+      <Container fluid>
         <NetsContainer xs={1} md={2} lg={3} className='g-5 pb-5 px-4 mx-2 my-0'>
           {netsData.map((net, index) => (
             <Col md={6} key={index}>
@@ -83,6 +83,7 @@ function App() {
                   <Card.Title>
                     <b>{net.name}</b>
                   </Card.Title>
+                  <span className='product-link'>View specifications →</span>
                 </Card.Body>
               </Net>
             </Col>
@@ -91,7 +92,6 @@ function App() {
       </Container>
 
       <footer className='mt-5'>
-        {' '}
         <hr className='mx-5' />
         <Row xs={1} md={3} className='mx-5'>
           <Col className='my-auto pb-3'>
@@ -102,7 +102,6 @@ function App() {
               <b>Phone number</b>
             </Col>
             <Col>
-              {' '}
               <a href='tel:+6421368967'>021368967</a>
             </Col>
           </Col>
